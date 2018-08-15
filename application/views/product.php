@@ -33,7 +33,7 @@
 	<link rel="stylesheet"
 				href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="sidebar-mini skin-black-light">
 <div class="wrapper">
 
 	<?php
@@ -54,6 +54,25 @@
 					<div class="box">
 						<div class="box-header">
 							<h3 class="box-title">Hover Data Table</h3>
+							<span class="pull-right"> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product">+ Product</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger">Delete Selected</button> </span>
+							<div class="modal fade" id="add-product">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title">Default Modal</h4>
+										</div>
+										<div class="modal-body">
+											<p>One fine body&hellip;</p>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-primary">Save changes</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
