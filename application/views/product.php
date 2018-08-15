@@ -20,6 +20,8 @@
 			 folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="<?=base_url();?>/resource/dist/css/skins/_all-skins.min.css">
 
+	<link rel="stylesheet" href="<?=base_url('resource/')?>dt-buttons/css/colReorder.dataTables.min.css">
+
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -164,7 +166,29 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?=base_url();?>/resource/dist/js/demo.js"></script>
 <!-- page script -->
-<script>
+
+
+
+
+
+
+<script type="text/javascript" language="javascript" src="<?=base_url('resource/')?>dt-buttons/js/dataTables.buttons.min.js">
+</script>
+<script type="text/javascript" language="javascript" src="<?=base_url('resource/')?>dt-buttons/js/buttons.bootstrap.min.js"></script>
+<script type="text/javascript" language="javascript" src="<?=base_url('resource/')?>dt-buttons/js/jszip.min.js">
+</script>
+<script type="text/javascript" language="javascript" src="<?=base_url('resource/')?>dt-buttons/js/pdfmake.min.js">
+</script>
+<script type="text/javascript" language="javascript" src="<?=base_url('resource/')?>dt-buttons/js/vfs_fonts.js">
+</script>
+<script type="text/javascript" language="javascript" src="<?=base_url('resource/')?>dt-buttons/js/buttons.html5.min.js">
+</script>
+<script type="text/javascript" language="javascript" src="<?=base_url('resource/')?>dt-buttons/js/buttons.print.min.js">
+</script>
+<script type="text/javascript" language="javascript" src="<?=base_url('resource/')?>dt-buttons/js/buttons.colVis.min.js">
+</script>
+<script type="text/javascript" language="javascript" src="<?=base_url('resource/')?>dt-buttons/js/dataTables.colReorder.min.js">
+</script>
 
 
 
@@ -174,9 +198,91 @@
 
 
 
-
+<script type="text/javascript">
 $(function(){
 	var t=$('#product').DataTable({
+		dom: '<"col-md-4"l><"col-md-4"B><"col-md-4"f>rt<"col-md-4"i><"col-md-8"p>',
+		buttons: [
+			{
+				extend: "copyHtml5",
+				text: "<i class=\'fa fa-copy\' title=\'Copy\' data-toggle=\'tooltip\' style=\'font-size:1.5em;color:#ef5350;\'></i>",
+				init: function(api, node, config) {
+				       $(node).removeClass('btn-primary')},
+				className : 'btn btn-default',
+				exportOptions: {
+						columns: ":visible:not(.not-export-col)",
+						stripHtml: true
+			}},
+			{
+				extend: "pdfHtml5",
+				text: "<i class=\'fa fa-file-pdf-o\' title=\'Download PDF\' data-toggle=\'tooltip\' style=\'font-size:1.5em;color:#4caf50;\'></i>",
+				init: function(api, node, config) {
+				       $(node).removeClass('btn-primary')},
+				className : 'btn btn-default',
+				exportOptions: {
+						columns: ":visible:not(.not-export-col)",
+						stripHtml: true
+			}},
+			{
+				extend: "print",
+				text: "<i class=\'fa fa-print\' title=\'Print\' data-toggle=\'tooltip\' style=\'font-size:1.5em;color:#9575cd;\'></i>",
+				init: function(api, node, config) {
+				       $(node).removeClass('btn-primary')},
+				className : 'btn btn-default',
+				exportOptions: {
+						columns: ":visible:not(.not-export-col)",
+						stripHtml: false
+			}},
+			{
+				extend: "excelHtml5",
+				text: "<i class=\'fa fa-file-excel-o\' title=\'Download Excel\' data-toggle=\'tooltip\' style=\'font-size:1.5em;color:#ffa726;\'></i>",
+				init: function(api, node, config) {
+				       $(node).removeClass('btn-primary')},
+				className : 'btn btn-default',
+				exportOptions: {
+						columns: ":visible:not(.not-export-col)",
+						stripHtml: false
+			}},
+			{
+				extend: "csvHtml5",
+				text: "<i class=\'fa fa-file-text-o\' title=\'Download CSV\' data-toggle=\'tooltip\' style=\'font-size:1.5em;color:#4db6ac\'></i>",
+				init: function(api, node, config) {
+				       $(node).removeClass('btn-primary')},
+				className : 'btn btn-default',
+				exportOptions: {
+						columns: ":visible:not(.not-export-col)",
+						stripHtml: false
+			}},
+			{
+				extend: "colvis",
+				text: "<i class=\'fa fa-eye\' title=\'Column Visibility\' data-toggle=\'tooltip\' style=\'font-size:1.5em;color:#a1887f;\'></i>",
+				init: function(api, node, config) {
+				       $(node).removeClass('btn-primary')},
+				className : 'btn btn-default',
+				exportOptions: {
+						columns: ":visible:not(.not-export-col)",
+						stripHtml: false
+			}},
+		],
+		colReorder: true,
+		columnDefs: [{
+			searchable  : true,
+			orderable   : true,
+			targets     : 0,
+			className   : "text-center",
+			targets     : "_all",
+		}],
+		paging        : true,
+		responsive  : true,
+		lengthChange  : true,
+		searching     : true,
+		ordering      : true,
+		info          : true,
+		scrollY       : '52vh',
+		scrollX       : true,
+		scrollCollapse: true,
+		autoWidth     : false,
+		bProcessing   : true,
 		sAjaxSource   : "<?=base_url('/Product/get_product/')?>",
 		aoColumns     : [
 			{ mData : 'PName'},
