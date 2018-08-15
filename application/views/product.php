@@ -55,74 +55,23 @@
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
-							<table id="example2" class="table table-bordered table-hover">
+							<table id="product" class="table table-bordered table-hover">
 								<thead>
 								<tr>
-									<th><i class="fa fa-check"></i></th>
 									<th>Name</th>
-									<th>Description</th>
 									<th>Price</th>
+									<th>Description</th>
 									<th>Category</th>
 									<th>Action</th>
 								</tr>
 								</thead>
-								<tbody>
-								<tr>
-									<td><input type="checkbox" name=""></td>
-									<td>Moto</td>
-									<td>2018 budget stock android phone</td>
-									<td>17000</td>
-									<td>Smartphone</td>
-									<td>
-										<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-view">View</button>
-										<div class="modal fade" id="modal-view">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span></button>
-														<h4 class="modal-title">Default Modal</h4>
-													</div>
-													<div class="modal-body">
-														<p>One fine body&hellip;</p>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-														<button type="button" class="btn btn-primary">Save changes</button>
-													</div>
-												</div>
-											</div>
-										</div>
-										<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-update">Update</button>
-										<div class="modal fade" id="modal-update">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span></button>
-														<h4 class="modal-title">Default Modal</h4>
-													</div>
-													<div class="modal-body">
-														<p>One fine body&hellip;</p>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-														<button type="button" class="btn btn-primary">Save changes</button>
-													</div>
-												</div>
-											</div>
-										</div>
-										<button type="button" class="btn btn-danger">Delete</button>
-									</td>
-								</tr>
-								</tbody>
+
 								<tfoot>
 								<tr>
 								<tr>
-									<th><i class="fa fa-check"></i></th>
 									<th>Name</th>
-									<th>Description</th>
 									<th>Price</th>
+									<th>Description</th>
 									<th>Category</th>
 									<th>Action</th>
 								</tr>
@@ -154,6 +103,49 @@
 			 immediately after the control sidebar -->
 	<div class="control-sidebar-bg"></div>
 </div>
+
+
+
+<div class="modal fade" id="modal-view">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Default Modal</h4>
+			</div>
+			<div class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal-update">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Default Modal</h4>
+			</div>
+			<div class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
@@ -173,17 +165,30 @@
 <script src="<?=base_url();?>/resource/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
-	$(function () {
-		$('#example1').DataTable()
-		$('#example2').DataTable({
-			'paging'      : true,
-			'lengthChange': true,
-			'searching'   : true,
-			'ordering'    : true,
-			'info'        : true,
-			'autoWidth'   : true
-		})
-	})
+
+
+
+
+
+
+
+
+
+
+$(function(){
+	var t=$('#product').DataTable({
+		sAjaxSource   : "<?=base_url('/Product/get_product/')?>",
+		aoColumns     : [
+			{ mData : 'PName'},
+			{ mData : 'Price'},
+			{ mData : 'Description'},
+			{ mData : 'CName'},
+			{ data  : null, render: function ( data, type, row ){
+				return '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-view">View</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update">Update</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger">Delete</button>';
+			}},
+		]
+	});
+});
 </script>
 </body>
 </html>
