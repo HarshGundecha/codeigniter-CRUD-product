@@ -362,7 +362,7 @@ $(function(){
 			{ mData : 'Description'},
 			{ mData : 'CName'},
 			{ data  : null, render: function ( data, type, row ){
-				return '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-view">View</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update">Update</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger">Delete</button>';
+				return '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-view">View</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update">Update</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger">Delete</button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=base_url("/Product/slug")?>&phone=user_phone_number" class="btn btn-success"><i style="font-size:1.3em;font-weight:300" class="fa fa-whatsapp"></i></a>';
 			}},
 		]
 	});
