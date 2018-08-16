@@ -34,10 +34,10 @@ class Product extends CI_Controller {
 
 	public function add_product()
 	{
-		$this->fv->set_rules('aName', 'Product Name', 'trim|required');
+		$this->fv->set_rules('aName', 'Product Name', 'trim|required|htmlspecialchars');
 		$this->fv->set_rules('aPrice', 'Product Price', 'trim|number');
-		$this->fv->set_rules('aDescription', 'Product Description', 'trim|required');
-		$this->fv->set_rules('aCategory', 'Product Category', 'trim|required');
+		$this->fv->set_rules('aDescription', 'Product Description', 'trim|required|htmlspecialchars');
+		$this->fv->set_rules('aCategory', 'Product Category', 'trim|required|htmlspecialchars');
 		if($this->fv->run()==FALSE)
 			$response=['status'=>false, 'response'=>validation_errors()];
 		else
