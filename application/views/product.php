@@ -63,19 +63,72 @@
 												<span aria-hidden="true">&times;</span></button>
 											<h4 class="modal-title">Default Modal</h4>
 										</div>
-										<div class="modal-body">
-											<p>One fine body&hellip;</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Save changes</button>
-										</div>
+											<form role="form" method="POST" action="<?=base_url('/Product/add_product/')?>">
+												<div class="modal-body">
+													<div class="box box-primary" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
+
+								            <div class="box-header with-border">
+								              <h3 class="box-title">Quick Example</h3>
+								            </div>
+							              <div class="box-body">
+							                <div class="row">
+							                	<div class="col-md-5">
+																	<div class="form-group">
+									                  <label for="aName">Name</label>
+									                  <input type="text" class="form-control" name="aName" id="aName" placeholder="Name">
+									                </div>
+							                	</div>
+																<div class="col-md-3">
+																	<div class="form-group">
+																		<label for="aPrice">Price</label>
+																		<input type="text" class="form-control" name="aPrice" id="aPrice" placeholder="Price">
+																	</div>
+																</div>
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<label for="aCategory">Category</label>
+																		<select class="form-control" name="aCategory">
+																			<?php
+																			foreach($cat_data as $cd)
+																				echo "<option value=\"$cd->CategorySlug\">$cd->Name</option>";
+																			?>
+																		</select>
+																	</div>
+							                	</div>
+																<div class="col-md-12">
+																	<div class="form-group">
+									                  <label for="aDecription">Decription</label>
+									                  <textarea class="form-control" name="aDecription" id="aDecription" placeholder="Decription"></textarea>
+									                </div>
+																</div>
+							                </div>
+							              </div>
+							          	</div>
+
+													<div class="alert alert-danger alert-dismissible" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
+						                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						                <h4><i class="icon fa fa-ban"></i> Invalid Input :(</h4>
+														text here
+						              </div>
+
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary">Save changes</button>
+											</div>
+						        </form>
 									</div>
 								</div>
 							</div>
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
+							<div class="alert alert-success alert-dismissible" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Success :)</h4>
+								text here
+              </div>
 							<table id="product" class="table table-bordered table-hover">
 								<thead>
 								<tr>
