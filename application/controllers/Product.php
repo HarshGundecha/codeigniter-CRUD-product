@@ -45,6 +45,7 @@ class Product extends CI_Controller {
 			$data=null;
 			$data = [
 				'Name'=>$this->input->post('aName'),
+				'ProductSlug'=>url_title($this->input->post('aName'),'-',true),
 				'Price'=>$this->input->post('aPrice'),
 				'Description'=>$this->input->post('aDescription'),
 				'CategorySlug'=>$this->input->post('aCategory'),
