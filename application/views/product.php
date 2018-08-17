@@ -51,10 +51,10 @@
 		<section class="content">
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="box">
+					<div class="box" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
 						<div class="box-header">
 							<h3 class="box-title">Hover Data Table</h3>
-							<span class="pull-right"> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product">+ Product</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger">Delete Selected</button> </span>
+							<span class="pull-right"> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product"><i class="fa fa-plus"></i> Product</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Selected</button> </span>
 							<div class="modal fade" id="add-product">
 								<div class="modal-dialog">
 									<div class="modal-content">
@@ -63,7 +63,7 @@
 												<span aria-hidden="true">&times;</span></button>
 											<h4 class="modal-title">Default Modal</h4>
 										</div>
-											<form role="form" method="POST" action="<?=base_url('/Product/add_product/')?>">
+											<form role="form" method="POST" action="<?=base_url('/Product/add_product/')?>" id="form-add-product">
 												<div class="modal-body">
 													<div class="box box-primary" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
 
@@ -75,7 +75,7 @@
 							                	<div class="col-md-5">
 																	<div class="form-group">
 									                  <label for="aName">Name</label>
-									                  <input type="text" class="form-control" name="aName" id="aName" placeholder="Name">
+									                  <input autofocus type="text" class="form-control" name="aName" id="aName" placeholder="Name">
 									                </div>
 							                	</div>
 																<div class="col-md-3">
@@ -97,25 +97,27 @@
 							                	</div>
 																<div class="col-md-12">
 																	<div class="form-group">
-									                  <label for="aDecription">Decription</label>
-									                  <textarea class="form-control" name="aDecription" id="aDecription" placeholder="Decription"></textarea>
+									                  <label for="aDescription">Description</label>
+									                  <textarea class="form-control" name="aDescription" id="aDescription" placeholder="Description"></textarea>
 									                </div>
 																</div>
 							                </div>
 							              </div>
 							          	</div>
 
-													<div class="alert alert-danger alert-dismissible" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
+													<div class="alert alert-danger alert-dismissible" id="add-failed-alert" style="display:none;box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
 						                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 						                <h4><i class="icon fa fa-ban"></i> Invalid Input :(</h4>
-														text here
+														<div>
+															text here
+														</div>
 						              </div>
 
 
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-												<button type="submit" class="btn btn-primary">Save changes</button>
+												<button type="button" id="btn-add-product" class="btn btn-primary">Save changes</button>
 											</div>
 						        </form>
 									</div>
@@ -124,10 +126,12 @@
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
-							<div class="alert alert-success alert-dismissible" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
+							<div class="alert alert-success alert-dismissible" id="add-success-alert" style="display:none;box-shadow:0 5px 8px 0 rgba(0,0,0,0.1),0 3px 10px 0 rgba(0,0,0,0.09) !important;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h4><i class="icon fa fa-check"></i> Success :)</h4>
-								text here
+								<div>
+									text here
+								</div>
               </div>
 							<table id="product" class="table table-bordered table-hover">
 								<thead>
@@ -362,10 +366,41 @@ $(function(){
 			{ mData : 'Description'},
 			{ mData : 'CName'},
 			{ data  : null, render: function ( data, type, row ){
-				return '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-view">View</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update">Update</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger">Delete</button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=base_url("/Product/slug")?>&phone=user_phone_number" class="btn btn-success"><i style="font-size:1.3em;font-weight:300" class="fa fa-whatsapp"></i></a>';
+				return '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-view"><i style="font-size:1.3em;font-weight:300" class="fa fa-eye"></i></button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update"><i style="font-size:1.3em;font-weight:300" class="fa fa-edit"></i></button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=base_url("/Product/slug")?>&phone=user_phone_number" class="btn btn-success"><i style="font-size:1.3em;font-weight:300" class="fa fa-whatsapp"></i></a>';
 			}},
 		]
 	});
+
+	$('#btn-add-product').on('click',function(e){
+		$.ajax({
+			url:"<?=base_url('/Product/add_product/')?>",
+			data:$('#form-add-product').serialize(),
+			type:'POST',
+			success:function(rs)
+			{
+				let r=JSON.parse(rs);
+				if(r.status)
+				{
+					$("#add-product").modal("toggle");
+					$('#add-success-alert div').html(r.response);
+					$('#add-success-alert').show();
+					$('#product').DataTable().ajax.reload(null, false);
+				}
+				else
+				{
+					$('#add-failed-alert div').html(r.response);
+					$('#add-failed-alert').show();
+				}
+			}
+		});
+
+	});
+
+	$("#add-product").on('hidden.bs.modal', function () {
+		$('#add-failed-alert').hide();
+		$('#form-add-product')[0].reset();
+	});
+
 });
 </script>
 </body>
