@@ -29,6 +29,13 @@
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
+	<style media="screen">
+		.my-dt-icon{
+			font-size:1.3em;
+			font-weight:300;
+		}
+	</style>
+
 	<!-- Google Font -->
 	<link rel="stylesheet"
 				href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -54,7 +61,7 @@
 					<div class="box" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
 						<div class="box-header">
 							<h3 class="box-title">Hover Data Table</h3>
-							<span class="pull-right"> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product"><i class="fa fa-plus"></i> Product</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Selected</button> </span>
+							<span class="pull-right"> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product"><i class="fa fa-plus"></i> Product</button>&nbsp;&nbsp;&nbsp;<button id ="delete-selected-product" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Selected</button> </span>
 							<div class="modal fade" id="add-product">
 								<div class="modal-dialog">
 									<div class="modal-content">
@@ -136,6 +143,7 @@
 							<table id="product" class="table table-bordered table-hover">
 								<thead>
 								<tr>
+									<th><i class="fa fa-check"></i></th>
 									<th>Name</th>
 									<th>Price</th>
 									<th>Description</th>
@@ -147,6 +155,7 @@
 								<tfoot>
 								<tr>
 								<tr>
+									<th><i class="fa fa-check"></i></th>
 									<th>Name</th>
 									<th>Price</th>
 									<th>Description</th>
@@ -361,14 +370,44 @@ $(function(){
 		bProcessing   : true,
 		sAjaxSource   : "<?=base_url('/Product/get_product/')?>",
 		aoColumns     : [
+			{ data	: null, render: function ( data, type, row ){
+				return '<input type="checkbox" name="dProduct[]" value="'+data.ProductSlug+'">';
+			}},
 			{ mData : 'PName'},
 			{ mData : 'Price'},
 			{ mData : 'Description'},
 			{ mData : 'CName'},
 			{ data  : null, render: function ( data, type, row ){
-				return '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-view"><i style="font-size:1.3em;font-weight:300" class="fa fa-eye"></i></button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update"><i style="font-size:1.3em;font-weight:300" class="fa fa-edit"></i></button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=base_url("/Product/slug")?>&phone=user_phone_number" class="btn btn-success"><i style="font-size:1.3em;font-weight:300" class="fa fa-whatsapp"></i></a>';
+				return '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-view"><i class="fa fa-info-circle my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update"><i class="fa fa-edit my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button id="'+data.ProductSlug+'" type="button" class="btn btn-danger delete"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=base_url("/Product/slug")?>&phone=user_phone_number" class="btn btn-success"><i class="fa fa-whatsapp my-dt-icon"></i></a>';
 			}},
 		]
+	});
+
+	t.on('click', '.delete',function(e){
+		if(confirm('Confirm delete ?'))
+		{
+			$.ajax({
+				url:"<?=base_url('/Product/delete_product/')?>"+$(this).attr('id'),
+				type:'POST',
+				success:function(rs){
+					$('#product').DataTable().ajax.reload(null, false);
+				}
+			});
+		}
+	});
+
+	$('#delete-selected-product').on('click',function(){
+		if(confirm('Confirm Multiple delete ?'))
+		{
+			$.ajax({
+				url:"<?=base_url('/Product/delete_product/')?>",
+				data:$('table input').serialize(),
+				type:'POST',
+				success:function(rs){
+					$('#product').DataTable().ajax.reload(null, false);
+				}
+			});
+		}
 	});
 
 	$('#btn-add-product').on('click',function(e){
@@ -376,18 +415,15 @@ $(function(){
 			url:"<?=base_url('/Product/add_product/')?>",
 			data:$('#form-add-product').serialize(),
 			type:'POST',
-			success:function(rs)
-			{
+			success:function(rs){
 				let r=JSON.parse(rs);
-				if(r.status)
-				{
+				if(r.status){
 					$("#add-product").modal("toggle");
 					$('#add-success-alert div').html(r.response);
 					$('#add-success-alert').show();
 					$('#product').DataTable().ajax.reload(null, false);
 				}
-				else
-				{
+				else{
 					$('#add-failed-alert div').html(r.response);
 					$('#add-failed-alert').show();
 				}
