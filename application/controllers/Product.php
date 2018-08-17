@@ -56,4 +56,16 @@ class Product extends CI_Controller {
 		echo json_encode($response);
 	}
 
+	public function delete_product($slug=false)
+	{
+		if($slug)
+		{
+			$where=null;
+			$where=['ProductSlug'=>$slug];
+			$this->pm->delete_product_d($where);
+		}
+		else
+			$this->pm->delete_multiple_product_d($this->input->post('dProduct'));
+	}
+
 }
