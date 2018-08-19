@@ -61,8 +61,8 @@
 					<div class="box" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
 						<div class="box-header">
 							<h3 class="box-title">Hover Data Table</h3>
-							<span class="pull-right"> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-product"><i class="fa fa-plus"></i> Product</button>&nbsp;&nbsp;&nbsp;<button id ="delete-selected-product" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Selected</button> </span>
-							<div class="modal fade" id="add-product">
+							<span class="pull-right"> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add-product"><i class="fa fa-plus"></i> Product</button>&nbsp;&nbsp;&nbsp;<button id ="delete-selected-product" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Selected</button> </span>
+							<div class="modal fade" id="modal-add-product">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -133,7 +133,7 @@
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
-							<div class="alert alert-success alert-dismissible" id="add-success-alert" style="display:none;box-shadow:0 5px 8px 0 rgba(0,0,0,0.1),0 3px 10px 0 rgba(0,0,0,0.09) !important;">
+							<div class="alert alert-success alert-dismissible" id="page-success-alert" style="display:none;box-shadow:0 5px 8px 0 rgba(0,0,0,0.1),0 3px 10px 0 rgba(0,0,0,0.09) !important;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h4><i class="icon fa fa-check"></i> Success :)</h4>
 								<div>
@@ -188,8 +188,7 @@
 </div>
 
 
-
-<div class="modal fade" id="modal-view">
+<div class="modal fade" id="modal-update-product">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -197,36 +196,18 @@
 					<span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title">Default Modal</h4>
 			</div>
-			<div class="modal-body">
-				<p>One fine body&hellip;</p>
-			</div>
+			<form role="form" method="POST" action="#" id="form-update-product">
+				<div class="modal-body" id="modal-update-content">
+
+				</div>
+			</form>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-primary" id="btn-update-product">Save changes</button>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="modal-update">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Default Modal</h4>
-			</div>
-			<div class="modal-body">
-				<p>One fine body&hellip;</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-
 
 
 <!-- ./wrapper -->
@@ -373,12 +354,12 @@ $(function(){
 			{ mData : 'Price'},
 			{ mData : 'CName'},
 			{ data  : null, render: function ( data, type, row ){
-				return '<a href="<?=base_url('/Product/get_product/')?>'+data.ProductSlug+'" class="btn btn-success"><i class="fa fa-info-circle my-dt-icon"></i></a>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update"><i class="fa fa-edit my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button id="'+data.ProductSlug+'" type="button" class="btn btn-danger delete"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=base_url('/Product/get_product/')?>'+data.ProductSlug+'&phone=user_phone_number" class="btn btn-success"><i class="fa fa-whatsapp my-dt-icon"></i></a>';
+				return '<a href="<?=base_url('/Product/get_product/')?>'+data.ProductSlug+'" class="btn btn-success"><i class="fa fa-info-circle my-dt-icon"></i></a>&nbsp;&nbsp;&nbsp;<button type="button" id="'+data.ProductSlug+'" class="btn btn-primary update-product" data-toggle="modal" data-target="#modal-update-product"><i class="fa fa-edit my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button id="'+data.ProductSlug+'" type="button" class="btn btn-danger delete-product"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=base_url('/Product/get_product/')?>'+data.ProductSlug+'&phone=user_phone_number" class="btn btn-success"><i class="fa fa-whatsapp my-dt-icon"></i></a>';
 			}},
 		]
 	});
 
-	t.on('click', '.delete',function(e){
+	t.on('click', '.delete-product',function(e){
 		if(confirm('Confirm delete ?'))
 		{
 			$.ajax({
@@ -389,6 +370,17 @@ $(function(){
 				}
 			});
 		}
+	});
+
+	t.on('click', '.update-product',function(e){
+		$.ajax({
+			url:"<?=base_url('/Product/get_product_update/')?>"+$(this).attr('id'),
+			type:'POST',
+			success:function(rs){
+				$("#modal-update-content").html(rs);
+				$("#update-product").modal("toggle");
+			}
+		});
 	});
 
 	$('#delete-selected-product').on('click',function(){
@@ -413,9 +405,9 @@ $(function(){
 			success:function(rs){
 				let r=JSON.parse(rs);
 				if(r.status){
-					$("#add-product").modal("toggle");
-					$('#add-success-alert div').html(r.response);
-					$('#add-success-alert').show();
+					$("#modal-add-product").modal("toggle");
+					$('#page-success-alert div').html(r.response);
+					$('#page-success-alert').show();
 					$('#product').DataTable().ajax.reload(null, false);
 				}
 				else{
@@ -427,9 +419,30 @@ $(function(){
 
 	});
 
+	$('#btn-update-product').on('click',function(e){
+		$.ajax({
+			url:"<?=base_url('/Product/set_product_update/')?>",
+			data:$('#form-update-product').serialize(),
+			type:'POST',
+			success:function(rs){
+				let r=JSON.parse(rs);
+				if(r.status){
+					$("#modal-update-product").modal("toggle");
+					$('#page-success-alert div').html(r.response);
+					$('#page-success-alert').show();
+					$('#product').DataTable().ajax.reload(null, false);
+				}
+				else{
+					$('#update-failed-alert div').html(r.response);
+					$('#update-failed-alert').show();
+				}
+			}
+		});
+	});
+
 	$("#add-product").on('hidden.bs.modal', function () {
 		$('#add-failed-alert').hide();
-		$('#form-add-product')[0].reset();
+		$('#form-update-product')[0].reset();
 	});
 
 });
