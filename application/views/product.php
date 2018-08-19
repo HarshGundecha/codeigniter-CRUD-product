@@ -153,13 +153,11 @@
 
 								<tfoot>
 								<tr>
-								<tr>
 									<th><i class="fa fa-check"></i></th>
 									<th>Name</th>
 									<th>Price</th>
 									<th>Category</th>
 									<th>Action</th>
-								</tr>
 								</tr>
 								</tfoot>
 							</table>
@@ -375,7 +373,7 @@ $(function(){
 			{ mData : 'Price'},
 			{ mData : 'CName'},
 			{ data  : null, render: function ( data, type, row ){
-				return '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-view"><i class="fa fa-info-circle my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update"><i class="fa fa-edit my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button id="'+data.ProductSlug+'" type="button" class="btn btn-danger delete"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=base_url("/Product/slug")?>&phone=user_phone_number" class="btn btn-success"><i class="fa fa-whatsapp my-dt-icon"></i></a>';
+				return '<a href="<?=base_url('/Product/get_product/')?>'+data.ProductSlug+'" class="btn btn-success"><i class="fa fa-info-circle my-dt-icon"></i></a>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update"><i class="fa fa-edit my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button id="'+data.ProductSlug+'" type="button" class="btn btn-danger delete"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=base_url('/Product/get_product/')?>'+data.ProductSlug+'&phone=user_phone_number" class="btn btn-success"><i class="fa fa-whatsapp my-dt-icon"></i></a>';
 			}},
 		]
 	});
