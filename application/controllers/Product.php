@@ -70,7 +70,7 @@ class Product extends CI_Controller {
 			$where=['ProductSlug'=>$slug];
 			$this->pm->delete_product_d($where);
 		}
-		else
+		elseif(count($this->input->post('dProduct'))>0)
 			$this->pm->delete_multiple_product_d($this->input->post('dProduct'));
 	}
 
