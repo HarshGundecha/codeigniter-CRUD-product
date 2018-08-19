@@ -8,9 +8,6 @@ class Product extends CI_Controller {
 	}
 	public function index()
 	{
-
-		//echo '<pre>';
-		//print_r($data);;
 		$data['cat_data'] = $this->pm->get_category_d();
 		$this->load->view('product',$data);
 	}
@@ -20,16 +17,25 @@ class Product extends CI_Controller {
 		$where=false;
 		if($slug)
 		{
-			$where=['ProductSlug'=>$slug];
+			$where=null;
+			$where = ['ProductSlug'=>$slug];
+			$data['product'] = $this->pm->get_product_data($where);
+			if(count($data['product'])==1)
+				$this->load->view('product_detail', $data);
+			else
+				$this->load->view('error', $data);
 		}
-		$data = null;
-		$data = $this->pm->get_product_data($where);
-		echo json_encode([
-      "sEcho" => 1,
-      "iTotalRecords" => count($data),
-      "iTotalDisplayRecords" => count($data),
-      "aaData"=>$data
-    ]);
+		else
+		{
+			$data = null;
+			$data = $this->pm->get_product_data($where);
+			echo json_encode([
+	      "sEcho" => 1,
+	      "iTotalRecords" => count($data),
+	      "iTotalDisplayRecords" => count($data),
+	      "aaData"=>$data
+	    ]);
+		}
 	}
 
 	public function add_product()
