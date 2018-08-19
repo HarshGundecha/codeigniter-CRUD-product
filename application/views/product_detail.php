@@ -64,13 +64,7 @@
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
-							<table id="product" class="table table-bordered table-hover">
-								<thead>
-								<tr>
-									<th>Title</th>
-									<th>Description</th>
-								</tr>
-								</thead>
+							<table class="table table-bordered table-striped">
 								<tbody>
 									<?php
 									echo "<tr><th>Name</th><td>{$product[0]->PName}</td></tr>";
