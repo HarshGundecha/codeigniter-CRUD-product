@@ -70,7 +70,7 @@
 												<span aria-hidden="true">&times;</span></button>
 											<h4 class="modal-title">Default Modal</h4>
 										</div>
-											<form role="form" method="POST" action="<?=base_url('/Product/add_product/')?>" id="form-add-product">
+											<form role="form" method="POST" action="<?=site_url('/Product/add_product/')?>" id="form-add-product">
 												<div class="modal-body">
 													<div class="box box-primary" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
 
@@ -345,7 +345,7 @@ $(function(){
 		scrollCollapse: true,
 		autoWidth     : false,
 		bProcessing   : true,
-		sAjaxSource   : "<?=base_url('/Product/get_product/')?>",
+		sAjaxSource   : "<?=site_url('/Product/get_product/')?>",
 		aoColumns     : [
 			{ data	: null, render: function ( data, type, row ){
 				return '<input type="checkbox" name="dProduct[]" value="'+data.ProductSlug+'">';
@@ -354,7 +354,7 @@ $(function(){
 			{ mData : 'Price'},
 			{ mData : 'CName'},
 			{ data  : null, render: function ( data, type, row ){
-				return '<a href="<?=base_url('/Product/get_product/')?>'+data.ProductSlug+'" class="btn btn-success"><i class="fa fa-info-circle my-dt-icon"></i></a>&nbsp;&nbsp;&nbsp;<button type="button" id="'+data.ProductSlug+'" class="btn btn-primary update-product" data-toggle="modal" data-target="#modal-update-product"><i class="fa fa-edit my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button id="'+data.ProductSlug+'" type="button" class="btn btn-danger delete-product"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=base_url('/Product/get_product/')?>'+data.ProductSlug+'&phone=user_phone_number" class="btn btn-success"><i class="fa fa-whatsapp my-dt-icon"></i></a>';
+				return '<a href="<?=site_url('/Product/get_product/')?>'+data.ProductSlug+'" class="btn btn-success"><i class="fa fa-info-circle my-dt-icon"></i></a>&nbsp;&nbsp;&nbsp;<button type="button" id="'+data.ProductSlug+'" class="btn btn-primary update-product" data-toggle="modal" data-target="#modal-update-product"><i class="fa fa-edit my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button id="'+data.ProductSlug+'" type="button" class="btn btn-danger delete-product"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=site_url('/Product/get_product/')?>'+data.ProductSlug+'&phone=user_phone_number" class="btn btn-success"><i class="fa fa-whatsapp my-dt-icon"></i></a>';
 			}},
 		]
 	});
@@ -363,7 +363,7 @@ $(function(){
 		if(confirm('Confirm delete ?'))
 		{
 			$.ajax({
-				url:"<?=base_url('/Product/delete_product/')?>"+$(this).attr('id'),
+				url:"<?=site_url('/Product/delete_product/')?>"+$(this).attr('id'),
 				type:'POST',
 				success:function(rs){
 					$('#product').DataTable().ajax.reload(null, false);
@@ -374,7 +374,7 @@ $(function(){
 
 	t.on('click', '.update-product',function(e){
 		$.ajax({
-			url:"<?=base_url('/Product/get_product_update/')?>"+$(this).attr('id'),
+			url:"<?=site_url('/Product/get_product_update/')?>"+$(this).attr('id'),
 			type:'POST',
 			success:function(rs){
 				$("#modal-update-content").html(rs);
@@ -387,7 +387,7 @@ $(function(){
 		if(confirm('Confirm Multiple delete ?'))
 		{
 			$.ajax({
-				url:"<?=base_url('/Product/delete_product/')?>",
+				url:"<?=site_url('/Product/delete_product/')?>",
 				data:$('table input').serialize(),
 				type:'POST',
 				success:function(rs){
@@ -399,7 +399,7 @@ $(function(){
 
 	$('#btn-add-product').on('click',function(e){
 		$.ajax({
-			url:"<?=base_url('/Product/add_product/')?>",
+			url:"<?=site_url('/Product/add_product/')?>",
 			data:$('#form-add-product').serialize(),
 			type:'POST',
 			success:function(rs){
@@ -421,7 +421,7 @@ $(function(){
 
 	$('#btn-update-product').on('click',function(e){
 		$.ajax({
-			url:"<?=base_url('/Product/set_product_update/')?>",
+			url:"<?=site_url('/Product/set_product_update/')?>",
 			data:$('#form-update-product').serialize(),
 			type:'POST',
 			success:function(rs){
