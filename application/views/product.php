@@ -113,7 +113,7 @@
 							          	</div>
 
 													<div class="alert alert-danger alert-dismissible" id="add-failed-alert" style="display:none;box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
-						                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+														<button type="button" class="close" aria-hidden="true" onclick="$(this).parent().hide()">×</button>
 						                <h4><i class="icon fa fa-ban"></i> Invalid Input :(</h4>
 														<div>
 															text here
@@ -134,7 +134,7 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="alert alert-success alert-dismissible" id="page-success-alert" style="display:none;box-shadow:0 5px 8px 0 rgba(0,0,0,0.1),0 3px 10px 0 rgba(0,0,0,0.09) !important;">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<button type="button" class="close" aria-hidden="true" onclick="$(this).parent().hide()">×</button>
                 <h4><i class="icon fa fa-check"></i> Success :)</h4>
 								<div>
 									text here
