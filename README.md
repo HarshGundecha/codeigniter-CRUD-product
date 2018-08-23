@@ -18,5 +18,6 @@ Basic codeigniter project for CRUD operations on product with few more features 
 * //OTP in registration - removed  
 
 # usage instructions
-* find sql file in resources/db/codeigniter_crud_product.sql folder and import it in db named "codeigniter_crud_product" in phpmyadmin
-* update base_url in config.php->config['base_url'] to your project location
+* find sql file in resource/db/codeigniter_crud_product.sql and import it in db named "codeigniter_crud_product" in phpmyadmin  
+* update database connection configuration in application/config/database.php file  
+* update base_url in config.php->config['base_url'] to your project location  
