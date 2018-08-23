@@ -60,7 +60,7 @@
 				<div class="col-xs-12">
 					<div class="box" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
 						<div class="box-header">
-							<h3 class="box-title">Hover Data Table</h3>
+							<h3 class="box-title">Products</h3>
 							<span class="pull-right"> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add-product"><i class="fa fa-plus"></i> Product</button>&nbsp;&nbsp;&nbsp;<button id ="delete-selected-product" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Selected</button> </span>
 							<div class="modal fade" id="modal-add-product">
 								<div class="modal-dialog">
