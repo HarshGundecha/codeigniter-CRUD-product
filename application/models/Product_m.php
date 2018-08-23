@@ -4,6 +4,7 @@ class Product_m extends MY_Model{
 
   public function get_product_data($where=false)
   {
+    $this->db->cache_on();
     if($where)
       $this->db->where($where);
     $data = $this->db
@@ -18,12 +19,15 @@ class Product_m extends MY_Model{
 
   public function add_product_data($data)
   {
+    $this->db->cache_delete('Product', 'get_product');
     $this->db
       ->insert('product', $data);
   }
 
   public function delete_product_data($condition)
   {
+    $this->db->cache_delete('Product', 'get_product');
+
     $this->db
       ->set(['Status'=>0])
       ->where($condition)
@@ -32,6 +36,7 @@ class Product_m extends MY_Model{
 
   public function update_product_data($data,$condition)
   {
+    $this->db->cache_delete('Product', 'get_product');
     $this->db
       ->set($data)
       ->where($condition)
@@ -40,6 +45,7 @@ class Product_m extends MY_Model{
 
   public function delete_multiple_product_data($condition)
   {
+    $this->db->cache_delete('Product', 'get_product');
     $this->db
       ->set(['Status'=>0])
       ->where_in('ProductSlug',$condition)
