@@ -1,6 +1,6 @@
 # codeigniter-CRUD-product
 Basic codeigniter project for CRUD operations on product with few more features :)  
-# [Live Demo](https://happysolutions.000webhostapp.com)  
+# [Live Demo](https://happysolutions.000webhostapp.com/Login)  
 **=> Features**
 * Login/Register with session  
 * Hashing in password  
