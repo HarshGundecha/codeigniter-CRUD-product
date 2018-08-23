@@ -35,7 +35,8 @@ class Login extends CI_Controller
         $this->ss->set_userdata([
           'User_Name'=>$login[0]->Name,
           'User_Slug'=>$login[0]->Slug,
-          'User_Email'=>$login[0]->Email
+					'User_Email'=>$login[0]->Email,
+          'User_Phone'=>$login[0]->Phone
         ]);
         redirect('Product/');
       }
