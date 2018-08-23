@@ -5,6 +5,8 @@ class Product extends CI_Controller {
 		Parent::__construct();
 		$this->load->model('Product_m', 'pm');
 		$this->load->library('form_validation', '','fv');
+		if(!$this->ss->User_Email)
+			redirect('Login');
 	}
 	public function index()
 	{
@@ -92,7 +94,7 @@ class Product extends CI_Controller {
 				</div>
 			</div>
 			<div class="alert alert-danger alert-dismissible" id="update-failed-alert" style="display:none;box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<button type="button" class="close" aria-hidden="true" onclick="$(this).parent().hide()">×</button>
 				<h4><i class="icon fa fa-ban"></i> Invalid Input :(</h4>
 				<div>
 					text here
@@ -128,7 +130,7 @@ class Product extends CI_Controller {
 
 	public function add_product()
 	{
-		$this->fv->set_rules('aName', 'Product Name', 'trim|required|htmlspecialchars|max_length[200]');
+		$this->fv->set_rules('aName', 'Product Name', 'trim|required|htmlspecialchars|max_length[200]|is_unique[product.Name]');
 		$this->fv->set_rules('aPrice', 'Product Price', 'trim|required|numeric|max_length[11]');
 		$this->fv->set_rules('aDescription', 'Product Description', 'trim|required|htmlspecialchars|max_length[500]');
 		$this->fv->set_rules('aCategory', 'Product Category', 'trim|required|htmlspecialchars|max_length[500]');
