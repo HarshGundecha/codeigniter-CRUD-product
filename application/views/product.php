@@ -68,14 +68,14 @@
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span></button>
-											<h4 class="modal-title">Default Modal</h4>
+											<h4 class="modal-title">Add Product</h4>
 										</div>
 											<form role="form" method="POST" action="<?=site_url('/Product/add_product/')?>" id="form-add-product">
 												<div class="modal-body">
 													<div class="box box-primary" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
 
 								            <div class="box-header with-border">
-								              <h3 class="box-title">Quick Example</h3>
+								              <h3 class="box-title">Product Details</h3>
 								            </div>
 							              <div class="box-body">
 							                <div class="row">
@@ -124,7 +124,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-												<button type="button" id="btn-add-product" class="btn btn-primary">Save changes</button>
+												<button type="button" id="btn-add-product" class="btn btn-primary">Add</button>
 											</div>
 						        </form>
 									</div>
@@ -194,7 +194,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Default Modal</h4>
+				<h4 class="modal-title">Update Product</h4>
 			</div>
 			<form role="form" method="POST" action="#" id="form-update-product">
 				<div class="modal-body" id="modal-update-content">
@@ -203,7 +203,7 @@
 			</form>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" id="btn-update-product">Save changes</button>
+				<button type="button" class="btn btn-primary" id="btn-update-product">Update</button>
 			</div>
 		</div>
 	</div>
@@ -354,7 +354,7 @@ $(function(){
 			{ mData : 'Price'},
 			{ mData : 'CName'},
 			{ data  : null, render: function ( data, type, row ){
-				return '<a href="<?=site_url('/Product/get_product/')?>'+data.ProductSlug+'" class="btn btn-success"><i class="fa fa-info-circle my-dt-icon"></i></a>&nbsp;&nbsp;&nbsp;<button type="button" id="'+data.ProductSlug+'" class="btn btn-primary update-product" data-toggle="modal" data-target="#modal-update-product"><i class="fa fa-edit my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button id="'+data.ProductSlug+'" type="button" class="btn btn-danger delete-product"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=site_url('/Product/get_product/')?>'+data.ProductSlug+'&phone=user_phone_number" class="btn btn-success"><i class="fa fa-whatsapp my-dt-icon"></i></a>';
+				return '<a href="<?=site_url('/Product/get_product/')?>'+data.ProductSlug+'" class="btn btn-success"><i class="fa fa-info-circle my-dt-icon"></i></a>&nbsp;&nbsp;&nbsp;<button type="button" id="'+data.ProductSlug+'" class="btn btn-primary update-product" data-toggle="modal" data-target="#modal-update-product"><i class="fa fa-edit my-dt-icon"></i></button>&nbsp;&nbsp;&nbsp;<button id="'+data.ProductSlug+'" type="button" class="btn btn-danger delete-product"><i style="font-size:1.3em;font-weight:300" class="fa fa-trash"></i></button>&nbsp;&nbsp;&nbsp;<a href="https://api.whatsapp.com/send?text=<?=site_url('/Product/get_product/')?>'+data.ProductSlug+'&phone=91<?=$this->ss->User_Phone;?>" class="btn btn-success"><i class="fa fa-whatsapp my-dt-icon"></i></a>';
 			}},
 		]
 	});
