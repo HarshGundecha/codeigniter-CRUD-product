@@ -42,6 +42,7 @@ class Login extends CI_Controller
       else
       {
         $data=null;
+        $data['error']="";
         $data['error']="Invalid Email or Password";
         $this->load->view('login',$data);
       }
