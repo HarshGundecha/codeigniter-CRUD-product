@@ -10,7 +10,7 @@ class Product extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->output->cache(1440);
+		//$this->output->cache(1440);
 		$data['cat_data'] = $this->pm->get_category_data();
 		$this->load->view('product',$data);
 	}
