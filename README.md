@@ -8,6 +8,7 @@ Basic codeigniter project for CRUD operations on product with few more features 
 * Web page caching  
 * Query caching  
 * Display of products by Datatables with advanced features(paging, sorting, generate pdf, copy data, print, hide columns etc)  
+* Delete single and multiple product with ajax
 * Ajax based insert/updates with validations  
 * Whatsapp product detail sharing
 * HTML5 location api for latitude and longitude  
