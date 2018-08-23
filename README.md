@@ -1,7 +1,7 @@
 # codeigniter-CRUD-product
 Basic codeigniter project for CRUD operations on product with few more features :)
 
-=> Features
+**=> Features**
 * Login/Register  
 * Hashing in password  
 * Use of PDO driver  
