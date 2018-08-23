@@ -13,12 +13,8 @@
   <link rel="stylesheet" href="<?=$bu;?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?=$bu;?>/bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="<?=$bu;?>/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=$bu;?>/dist/css/AdminLTE.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?=$bu;?>/plugins/iCheck/square/blue.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,6 +44,18 @@
         <input type="password" class="form-control" placeholder="Password" name="sPassword">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <?php
+        if(validation_errors()!="" || isset($error) && $error!="")
+        {
+      ?>
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h4><i class="icon fa fa-ban"></i>Invalid Input!</h4>
+            <?=validation_errors()!=""?validation_errors():$error;?>
+        </div>
+      <?php
+        }
+      ?>
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-6">
@@ -68,16 +76,6 @@
 <script src="<?=$bu;?>/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?=$bu;?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="<?=$bu;?>/plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });
-</script>
+
 </body>
 </html>

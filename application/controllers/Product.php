@@ -52,7 +52,7 @@ class Product extends CI_Controller {
 			<div class="box box-primary" style="box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;">
 
 				<div class="box-header with-border">
-					<h3 class="box-title">Quick Example</h3>
+					<h3 class="box-title">Product Details</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
